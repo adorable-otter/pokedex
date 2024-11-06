@@ -1,34 +1,19 @@
 import styled from 'styled-components';
+import { Card, CardButton } from '../styles/card';
 
-const PokeCard = ({ poke }) => {
+const PokeCard = ({ poke, handleBtnClick, btnLabel}) => {
   return (
     <Card>
-      <CardImg url={poke.img_url} />
+      <CardImg $url={poke.img_url} />
       <div>{poke.korean_name}</div>
       <div>No.{poke.id}</div>
-      <CardButton>추가</CardButton>
+      <CardButton onClick={handleBtnClick}>{btnLabel}</CardButton>
     </Card>
   );
 };
 
-const CardButton = styled.button`
-  width: 50px;
-  height: 30px;
-  color: white;
-  background-color: #f14747;
-  border: none;
-`;
-
-const Card = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  list-style: none;
-  width: 15%;
-`;
-
 const CardImg = styled.div`
-  background-image: url(${(props) => props.url});
+  background-image: url(${(props) => props.$url});
   width: 100%;
   padding-bottom: 100%;
   background-position: center;
