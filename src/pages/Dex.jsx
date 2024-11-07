@@ -13,10 +13,4 @@ const Dex = () => {
   );
 };
 
-// const TomatoButton = styled(Button)`
-//   color: tomato;
-//   border-color: tomato;
-// `;
-// 이런 모양으로 상속 가능
-
 export default Dex;
