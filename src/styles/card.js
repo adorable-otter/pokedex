@@ -20,11 +20,12 @@ const Card = styled.li`
 `;
 
 const CardButton = styled.button`
+  border: none;
+  border-radius: 4px;
   width: 50px;
   height: 30px;
   color: white;
   background-color: #f14747;
-  border: none;
 `;
 
 export { CardList, Card, CardButton };
