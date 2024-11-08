@@ -4,14 +4,19 @@ import { isEmpty } from '../modules/util';
 import { CardButton, CardList } from '../styles/card';
 import EmptyPokemon from './EmptyPokemon';
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
+  const navigate = useNavigate();
+
   const handleDeleteBtnClick = (e, id) => {
     e.stopPropagation();
     const newPokeList = selectedPokeList.filter((pokemon) => pokemon.id !== id);
     while (newPokeList.length < 6) newPokeList.push({});
     setSelectedPokeList(newPokeList);
   };
+
+  const handleCardClick = (id) => navigate(`/detail/${id}`);
 
   const createCard = (pokemon) => {
     const { img_url, korean_name, id } = pokemon;
@@ -22,6 +27,7 @@ const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
         key={pokemon.id}
         pokemon={{ img_url, korean_name, id }}
         buttonComponent={createDeleteButton(pokemon)}
+        onClick={handleCardClick}
       />
     );
   };

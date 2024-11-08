@@ -3,8 +3,11 @@ import MOCK_DATA from '../data';
 import PokemonCard from './PokemonCard';
 import { CardButton, CardList } from '../styles/card';
 import { isEmpty } from '../modules/util';
+import { useNavigate } from 'react-router-dom';
 
 const PokeList = ({ selectedPokeList, setSelectedPokeList }) => {
+  const navigate = useNavigate();
+
   const handleAddBtnClick = (e, newSelectedPoke) => {
     e.stopPropagation();
     const newPokeList = [...selectedPokeList];
@@ -16,6 +19,8 @@ const PokeList = ({ selectedPokeList, setSelectedPokeList }) => {
     newPokeList[idxForNew] = newSelectedPoke;
     setSelectedPokeList(newPokeList);
   };
+
+  const handleCardClick = (id) => navigate(`/detail/${id}`);
 
   const createAddButton = (pokemon) => (
     <CardButton onClick={(e) => handleAddBtnClick(e, pokemon)}>추가</CardButton>
@@ -31,6 +36,7 @@ const PokeList = ({ selectedPokeList, setSelectedPokeList }) => {
               key={pokemon.id}
               pokemon={{ id, korean_name, img_url }}
               buttonComponent={createAddButton(pokemon)}
+              onClick={handleCardClick}
             />
           );
         })}

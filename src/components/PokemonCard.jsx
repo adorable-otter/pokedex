@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 import { Card, CardImg } from '../styles/card';
-import { useNavigate } from 'react-router-dom';
 
-const PokemonCard = ({ pokemon, className, buttonComponent }) => {
-  const navigate = useNavigate();
-  const handleCardClick = (id) => navigate(`/detail/${id}`);
+const PokemonCard = ({ pokemon, className, buttonComponent, onClick }) => {
 
   return (
-    <Card className={className} onClick={() => handleCardClick(pokemon.id)}>
+    <Card className={className} onClick={() => onClick && onClick(pokemon.id)}>
       <CardImg $url={pokemon.img_url} />
       <CardTitle>{pokemon.korean_name}</CardTitle>
       {pokemon.id ? <span>No.{String(pokemon.id).padStart(3, '0')}</span> : null}

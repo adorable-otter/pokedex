@@ -7,10 +7,12 @@ const PokeDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { img_url, korean_name, types, description } = MOCK_DATA[id - 1];
+
   const handleBackButtonClick = (e) => {
     e.stopPropagation();
     navigate(-1);
   };
+
   const createBackButton = () => <BackButton onClick={(e) => handleBackButtonClick(e)}>뒤로 가기</BackButton>;
 
   return (
