@@ -33,6 +33,7 @@ const DetailCard = styled(PokemonCard)`
   width: auto;
   background-color: inherit;
   border: none;
+  box-shadow: none;
 `;
 
 const BackButton = styled.button`

@@ -17,10 +17,10 @@ const Card = styled.li`
   list-style: none;
   width: 12%;
   gap: 10px;
-  border: 1px solid lightgray;
   border-radius: 4px;
   padding: 12px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 8px lightgrey;
 `;
 
 const CardButton = styled.button`
