@@ -4,9 +4,12 @@ import PokemonCard from './PokemonCard';
 import { CardButton, CardList } from '../styles/card';
 import { isEmpty } from '../modules/util';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { PokemonContext } from '../context/pokemonContext';
 
-const PokemonList = ({ selectedPokemonList, setSelectedPokemonList }) => {
+const PokemonList = () => {
   const navigate = useNavigate();
+  const { selectedPokemonList, setSelectedPokemonList } = useContext(PokemonContext);
 
   const handleAddBtnClick = (e, newSelectedPoke) => {
     e.stopPropagation();

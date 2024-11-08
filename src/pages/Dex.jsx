@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import Dashboard from '../components/Dashboard';
 import PokemonList from '../components/PokemonList';
+import { PokemonContext } from '../context/pokemonContext';
 
 const Dex = () => {
   const [selectedPokemonList, setSelectedPokemonList] = useState(new Array(6).fill({}));
 
   return (
     <>
-      <Dashboard
-        selectedPokemonList={selectedPokemonList}
-        setSelectedPokemonList={setSelectedPokemonList}
-      />
-      <PokemonList
-        selectedPokemonList={selectedPokemonList}
-        setSelectedPokemonList={setSelectedPokemonList}
-      />
+      <PokemonContext.Provider
+        value={{
+          selectedPokemonList,
+          setSelectedPokemonList,
+        }}
+      >
+        <Dashboard />
+        <PokemonList />
+      </PokemonContext.Provider>
     </>
   );
 };

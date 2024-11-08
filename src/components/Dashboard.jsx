@@ -5,9 +5,12 @@ import { CardButton, CardList } from '../styles/card';
 import EmptyPokemon from './EmptyPokemon';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { PokemonContext } from '../context/pokemonContext';
+import { useContext } from 'react';
 
-const Dashboard = ({ selectedPokemonList, setSelectedPokemonList }) => {
+const Dashboard = () => {
   const navigate = useNavigate();
+  const { selectedPokemonList, setSelectedPokemonList } = useContext(PokemonContext);
 
   const handleDeleteBtnClick = (e, id) => {
     e.stopPropagation();
