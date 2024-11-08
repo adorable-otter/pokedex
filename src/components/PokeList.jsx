@@ -41,7 +41,9 @@ const PokeList = ({ selectedPokeList, setSelectedPokeList }) => {
 
 const ListWrap = styled.section`
   width: 70%;
-  background-color: aliceblue;
+  background-color: rgb(248, 248, 248);
+  padding: 20px;
+  border-radius: 8px;
 `;
 
 export default PokeList;

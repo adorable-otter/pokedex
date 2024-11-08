@@ -5,10 +5,9 @@ const CardList = styled.ul`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+  padding: 20px;
 `;
 
 const Card = styled.li`
@@ -16,7 +15,12 @@ const Card = styled.li`
   flex-direction: column;
   align-items: center;
   list-style: none;
-  width: 15%;
+  width: 12%;
+  gap: 10px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 12px;
+  background-color: rgb(255, 255, 255);
 `;
 
 const CardButton = styled.button`
@@ -28,4 +32,13 @@ const CardButton = styled.button`
   background-color: #f14747;
 `;
 
-export { CardList, Card, CardButton };
+const CardImg = styled.div`
+  background-image: url(${(props) => props.$url});
+  width: 100%;
+  padding-bottom: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+export { CardList, Card, CardButton, CardImg };

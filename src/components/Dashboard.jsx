@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import PokemonCard from './PokemonCard';
 import { isEmpty } from '../modules/util';
 import { CardButton, CardList } from '../styles/card';
+import EmptyPokemon from './EmptyPokemon';
+import { v4 as uuid } from 'uuid';
 
 const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
   const handleDeleteBtnClick = (e, id) => {
@@ -11,14 +13,12 @@ const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
     setSelectedPokeList(newPokeList);
   };
 
-  const createCard = (pokemon, idx) => {
+  const createCard = (pokemon) => {
     const { img_url, korean_name, id } = pokemon;
     return isEmpty(pokemon) ? (
-      <DashboardCard key={idx + 255}>
-        <EmptyPokeImg />
-      </DashboardCard>
+      <EmptyPokemon key={uuid()} />
     ) : (
-      <PokemonCard
+      <SmallPokemonCard
         key={pokemon.id}
         pokemon={{ img_url, korean_name, id }}
         buttonComponent={createDeleteButton(pokemon)}
@@ -29,9 +29,10 @@ const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
   const createDeleteButton = (pokemon) => (
     <CardButton onClick={(e) => handleDeleteBtnClick(e, pokemon.id)}>삭제</CardButton>
   );
+
   return (
     <BoardWrap>
-      <h2>나만의 포켓몬</h2>
+      <BoardTitle>나만의 포켓몬</BoardTitle>
       <CardList>{selectedPokeList.map((pokemon, idx) => createCard(pokemon, idx))}</CardList>
     </BoardWrap>
   );
@@ -42,25 +43,20 @@ const BoardWrap = styled.section`
   flex-direction: column;
   align-items: center;
   width: 70%;
-  border-radius: 4px;
-  background-color: aliceblue;
+  border-radius: 8px;
+  background-color: rgb(248, 248, 248);
   margin-bottom: 20px;
+  padding: 20px;
 `;
 
-const DashboardCard = styled.li`
-  list-style: none;
+const BoardTitle = styled.h1`
+  color: #e74767;
+  font-size: 2.2rem;
+  margin: 30px 0 30px;
+`;
+
+const SmallPokemonCard = styled(PokemonCard)`
   width: 10%;
-  border: 3px dotted gray;
-  padding: 10px;
-`;
-
-const EmptyPokeImg = styled.div`
-  background-image: url('/src/assets/pokeball.png');
-  width: 100%;
-  padding-bottom: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 `;
 
 export default Dashboard;

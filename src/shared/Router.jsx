@@ -23,7 +23,7 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffd07a;
+  background-color: #ebcb91;
   min-height: 100vh;
   padding: 30px;
   margin: 0;
