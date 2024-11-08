@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import Dashboard from '../components/Dashboard';
-import PokeList from '../components/PokeList';
+import PokemonList from '../components/PokemonList';
 
 const Dex = () => {
-  const [selectedPokeList, setSelectedPokeList] = useState(new Array(6).fill({}));
+  const [selectedPokemonList, setSelectedPokemonList] = useState(new Array(6).fill({}));
 
   return (
     <>
-      <Dashboard selectedPokeList={selectedPokeList} setSelectedPokeList={setSelectedPokeList}  />
-      <PokeList selectedPokeList={selectedPokeList} setSelectedPokeList={setSelectedPokeList}/>
+      <Dashboard
+        selectedPokemonList={selectedPokemonList}
+        setSelectedPokemonList={setSelectedPokemonList}
+      />
+      <PokemonList
+        selectedPokemonList={selectedPokemonList}
+        setSelectedPokemonList={setSelectedPokemonList}
+      />
     </>
   );
 };

@@ -6,14 +6,14 @@ import EmptyPokemon from './EmptyPokemon';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
+const Dashboard = ({ selectedPokemonList, setSelectedPokemonList }) => {
   const navigate = useNavigate();
 
   const handleDeleteBtnClick = (e, id) => {
     e.stopPropagation();
-    const newPokeList = selectedPokeList.filter((pokemon) => pokemon.id !== id);
-    while (newPokeList.length < 6) newPokeList.push({});
-    setSelectedPokeList(newPokeList);
+    const newPokemonList = selectedPokemonList.filter((pokemon) => pokemon.id !== id);
+    while (newPokemonList.length < 6) newPokemonList.push({});
+    setSelectedPokemonList(newPokemonList);
   };
 
   const handleCardClick = (id) => navigate(`/detail/${id}`);
@@ -39,7 +39,7 @@ const Dashboard = ({ selectedPokeList, setSelectedPokeList }) => {
   return (
     <BoardWrap>
       <BoardTitle>나만의 포켓몬</BoardTitle>
-      <CardList>{selectedPokeList.map((pokemon, idx) => createCard(pokemon, idx))}</CardList>
+      <CardList>{selectedPokemonList.map((pokemon, idx) => createCard(pokemon, idx))}</CardList>
     </BoardWrap>
   );
 };
