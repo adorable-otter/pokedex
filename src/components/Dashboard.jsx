@@ -1,22 +1,16 @@
 import styled from 'styled-components';
 import PokemonCard from './PokemonCard';
 import { isEmpty } from '../modules/util';
-import { CardButton, CardList } from '../styles/card';
 import EmptyPokemon from './EmptyPokemon';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { removePokemon } from '../redux/slices/selectedPokemonSlice';
+import { useSelector } from 'react-redux';
+import { CardList } from '../styles/card';
+import RemovePokemonButton from './RemovePokemonButton';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { selectedPokemonList } = useSelector((state) => state.selectedPokemonList);
-
-  const handleDeleteBtnClick = (e, id) => {
-    e.stopPropagation();
-    dispatch(removePokemon(id))
-  };
 
   const handleCardClick = (id) => navigate(`/detail/${id}`);
 
@@ -28,15 +22,11 @@ const Dashboard = () => {
       <SmallPokemonCard
         key={pokemon.id}
         pokemon={{ img_url, korean_name, id }}
-        buttonComponent={createDeleteButton(id)}
+        buttonComponents={[<RemovePokemonButton key="remove" pokemonId={pokemon.id} />]}
         onClick={handleCardClick}
       />
     );
   };
-
-  const createDeleteButton = (id) => (
-    <CardButton onClick={(e) => handleDeleteBtnClick(e, id)}>삭제</CardButton>
-  );
 
   return (
     <BoardWrap>

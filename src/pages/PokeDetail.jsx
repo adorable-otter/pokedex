@@ -2,24 +2,35 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PokemonCard from '../components/PokemonCard';
 import MOCK_DATA from '../data';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { LargeBackButton, LargeButtonStyle } from '../styles/button';
+import AddPokemonButton from '../components/AddPokemonButton';
+import RemovePokemonButton from '../components/RemovePokemonButton';
 
 const PokeDetail = () => {
   const navigate = useNavigate();
+  const { selectedPokemonList } = useSelector((state) => state.selectedPokemonList);
   const { id } = useParams();
   const { img_url, korean_name, types, description } = MOCK_DATA[id - 1];
 
-  const handleBackButtonClick = (e) => {
-    e.stopPropagation();
-    navigate(-1);
-  };
+  const createBackButton = () => (
+    <LargeBackButton onClick={() => navigate(-1)} key={'back'}>
+      뒤로 가기
+    </LargeBackButton>
+  );
 
-  const createBackButton = () => <BackButton onClick={(e) => handleBackButtonClick(e)}>뒤로 가기</BackButton>;
+  const createSelectToggle = (pokemon) => {
+    if (selectedPokemonList.find((pokemon) => pokemon.id === +id)) {
+      return <LargeRemovePokemonButton pokemonId={pokemon.id} key={'remove'} />;
+    }
+    return <LargeAddPokemonButton pokemon={pokemon} key={'add'} />;
+  };
 
   return (
     <CardWrap>
       <DetailCard
         pokemon={{ img_url, korean_name, types, description }}
-        buttonComponent={createBackButton()}
+        buttonComponents={[createBackButton(), createSelectToggle(MOCK_DATA[id - 1])]}
       />
     </CardWrap>
   );
@@ -38,12 +49,12 @@ const DetailCard = styled(PokemonCard)`
   box-shadow: none;
 `;
 
-const BackButton = styled.button`
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: black;
-  padding: 10px 20px 10px 20px;
+const LargeAddPokemonButton = styled(AddPokemonButton)`
+  ${LargeButtonStyle}
+`;
+
+const LargeRemovePokemonButton = styled(RemovePokemonButton)`
+  ${LargeButtonStyle}
 `;
 
 export default PokeDetail;

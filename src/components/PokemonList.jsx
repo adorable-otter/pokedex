@@ -1,25 +1,14 @@
 import styled from 'styled-components';
 import MOCK_DATA from '../data';
 import PokemonCard from './PokemonCard';
-import { CardButton, CardList } from '../styles/card';
+import { CardList } from '../styles/card';
 import { useNavigate } from 'react-router-dom';
-import { addPokemon } from '../redux/slices/selectedPokemonSlice';
-import { useDispatch } from 'react-redux';
+import AddPokemonButton from './AddPokemonButton';
 
 const PokemonList = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const handleAddBtnClick = (e, newSelectedPokemon) => {
-    e.stopPropagation();
-    dispatch(addPokemon(newSelectedPokemon));
-  };
 
   const handleCardClick = (id) => navigate(`/detail/${id}`);
-
-  const createAddButton = (pokemon) => (
-    <CardButton onClick={(e) => handleAddBtnClick(e, pokemon)}>추가</CardButton>
-  );
 
   return (
     <ListWrap>
@@ -30,7 +19,7 @@ const PokemonList = () => {
             <PokemonCard
               key={pokemon.id}
               pokemon={{ id, korean_name, img_url }}
-              buttonComponent={createAddButton(pokemon)}
+              buttonComponents={[<AddPokemonButton key={'add'} pokemon={pokemon} />]}
               onClick={handleCardClick}
             />
           );

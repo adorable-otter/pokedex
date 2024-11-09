@@ -23,15 +23,6 @@ const Card = styled.li`
   box-shadow: 0px 4px 8px lightgrey;
 `;
 
-const CardButton = styled.button`
-  border: none;
-  border-radius: 4px;
-  width: 50px;
-  height: 30px;
-  color: white;
-  background-color: #f14747;
-`;
-
 const CardImg = styled.div`
   background-image: url(${(props) => props.$url});
   width: 100%;
@@ -41,4 +32,4 @@ const CardImg = styled.div`
   background-size: cover;
 `;
 
-export { CardList, Card, CardButton, CardImg };
+export { CardList, Card, CardImg };
