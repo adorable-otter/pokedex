@@ -2,22 +2,17 @@ import styled from 'styled-components';
 import MOCK_DATA from '../data';
 import PokemonCard from './PokemonCard';
 import { CardButton, CardList } from '../styles/card';
-import { isEmpty } from '../modules/util';
 import { useNavigate } from 'react-router-dom';
+import { addPokemon } from '../redux/slices/selectedPokemonSlice';
+import { useDispatch } from 'react-redux';
 
-const PokemonList = ({ selectedPokemonList, setSelectedPokemonList }) => {
+const PokemonList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleAddBtnClick = (e, newSelectedPoke) => {
+  const handleAddBtnClick = (e, newSelectedPokemon) => {
     e.stopPropagation();
-    const newPokemonList = [...selectedPokemonList];
-    const idxForNew = newPokemonList.findIndex((pokemon) => isEmpty(pokemon));
-    if (idxForNew === -1) return alert('최대 6마리까지 추가할 수 있습니다.');
-    if (newPokemonList.find((pokemon) => pokemon.id === newSelectedPoke.id) !== undefined) {
-      return alert('동일한 포켓몬을 추가할 수 없습니다.');
-    }
-    newPokemonList[idxForNew] = newSelectedPoke;
-    setSelectedPokemonList(newPokemonList);
+    dispatch(addPokemon(newSelectedPokemon));
   };
 
   const handleCardClick = (id) => navigate(`/detail/${id}`);

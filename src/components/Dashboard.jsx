@@ -5,15 +5,17 @@ import { CardButton, CardList } from '../styles/card';
 import EmptyPokemon from './EmptyPokemon';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { removePokemon } from '../redux/slices/selectedPokemonSlice';
 
-const Dashboard = ({ selectedPokemonList, setSelectedPokemonList }) => {
+const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { selectedPokemonList } = useSelector((state) => state.selectedPokemonList);
 
   const handleDeleteBtnClick = (e, id) => {
     e.stopPropagation();
-    const newPokemonList = selectedPokemonList.filter((pokemon) => pokemon.id !== id);
-    while (newPokemonList.length < 6) newPokemonList.push({});
-    setSelectedPokemonList(newPokemonList);
+    dispatch(removePokemon(id))
   };
 
   const handleCardClick = (id) => navigate(`/detail/${id}`);
@@ -26,14 +28,14 @@ const Dashboard = ({ selectedPokemonList, setSelectedPokemonList }) => {
       <SmallPokemonCard
         key={pokemon.id}
         pokemon={{ img_url, korean_name, id }}
-        buttonComponent={createDeleteButton(pokemon)}
+        buttonComponent={createDeleteButton(id)}
         onClick={handleCardClick}
       />
     );
   };
 
-  const createDeleteButton = (pokemon) => (
-    <CardButton onClick={(e) => handleDeleteBtnClick(e, pokemon.id)}>삭제</CardButton>
+  const createDeleteButton = (id) => (
+    <CardButton onClick={(e) => handleDeleteBtnClick(e, id)}>삭제</CardButton>
   );
 
   return (
