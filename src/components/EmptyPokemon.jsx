@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { CardImg } from '../styles/card';
+import EMPTY_POKEMON_URL from '/public/pokeball.png';
 
 const EmptyPokemon = () => {
-  const EMPTY_POKEMON_URL = '/public/pokeball.png';
-
   return (
     <ImageWrap>
       <CardImg $url={EMPTY_POKEMON_URL} />

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import logoImgUrl from '/public/pokemon-logo.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Home = () => {
 const Logo = styled.div`
   width: 40%;
   padding-bottom: 14%;
-  background-image: url('/public/pokemon-logo.png');
+  background-image: url(${logoImgUrl});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
