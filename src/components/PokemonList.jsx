@@ -7,7 +7,6 @@ import AddPokemonButton from './AddPokemonButton';
 
 const PokemonList = () => {
   const navigate = useNavigate();
-
   const handleCardClick = (id) => navigate(`/detail/${id}`);
 
   return (

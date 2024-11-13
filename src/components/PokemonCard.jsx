@@ -6,9 +6,9 @@ const PokemonCard = ({ pokemon, className, buttonComponents, onClick }) => {
     <Card className={className} onClick={() => onClick && onClick(pokemon.id)}>
       <CardImg $url={pokemon.img_url} />
       <CardTitle>{pokemon.korean_name}</CardTitle>
-      {pokemon.id ? <PokemonNo>No.{String(pokemon.id).padStart(3, '0')}</PokemonNo> : null}
-      {pokemon.types ? <span>타입 : {pokemon.types.join(', ')}</span> : null}
-      {pokemon.description ? <span>{pokemon.description}</span> : null}
+      {pokemon.id && <PokemonNo>No.{String(pokemon.id).padStart(3, '0')}</PokemonNo>}
+      {pokemon.types && <span>타입 : {pokemon.types.join(', ')}</span>}
+      {pokemon.description && <span>{pokemon.description}</span>}
       <ButtonsWrap>{buttonComponents.map((component) => component)}</ButtonsWrap>
     </Card>
   );
